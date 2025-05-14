@@ -1,21 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, ArrowUpDown } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Company } from "@/types/company";
-import { useRouter } from "next/navigation";
-import { useRemoveCompany } from "@/hooks/useCompanies";
-import { useAppSelector } from "@/redux/hook";
+import CompanyActionsCell from "./CompanyActionCell";
 
 export const CompanyDataTableColumns: ColumnDef<Company>[] = [
   {
@@ -55,56 +45,12 @@ export const CompanyDataTableColumns: ColumnDef<Company>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: "posts",
-  //   header: "Posts",
-  // },
   {
     accessorKey: "follower_count",
     header: "Followers",
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      // This is the row object
-      // Can do stuff like calling the delete API with the id.
-      const company = row.original;
-
-      // Used to navigate to different pages
-      const router = useRouter();
-
-      // APIs to add and remove companies
-      const userEmail = useAppSelector((state) => state.user.email);
-      const removeCompany = useRemoveCompany(userEmail);
-      function handleRemove(id: string) {
-        removeCompany.mutate(id);
-      }
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="h-8 w-8 p-0 focus:outline-none focus:ring-0"
-            >
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => router.push(`/companies/${company.name}`)}
-            >
-              View Company
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleRemove(company.id)}>
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <CompanyActionsCell company={row.original} />,
   },
 ];
