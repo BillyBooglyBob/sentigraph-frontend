@@ -1,9 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   loginUser,
   registerUser,
   logoutUser,
-  getUserInformation,
 } from "@/lib/queries/auth";
 
 export function useAuth() {

@@ -5,7 +5,6 @@ import EditUserForm from "@/components/user/EditUserForm";
 import BackButton from "@/components/BackButton";
 import { useUpdateUser, useUserInformation } from "@/hooks/useAdmin";
 import { Loader2 } from "lucide-react";
-import { useAppSelector } from "@/redux/hook";
 
 interface AdminEditPageProps {
   params: Promise<{ id: string }>;

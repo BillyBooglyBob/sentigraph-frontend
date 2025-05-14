@@ -188,12 +188,7 @@ const RegisterForm = () => {
               )}
             />
             {register.error && (
-              <p className="text-red-500 text-sm">
-                {(register.error as any)?.email?.[0] ||
-                  (register.error as any)?.password1?.[0] ||
-                  (register.error as any)?.non_field_errors?.[0] ||
-                  "Registration failed."}
-              </p>
+              <p className="text-red-500 text-sm">Registration failed.</p>
             )}
             <Button className="w-full">Sign Up</Button>
           </form>

@@ -154,12 +154,7 @@ const LoginForm = () => {
               )}
             />
             {login.error && (
-              <p className="text-red-500 text-sm">
-                {(login.error as any)?.email?.[0] ||
-                  (login.error as any)?.password?.[0] ||
-                  (login.error as any)?.non_field_errors?.[0] ||
-                  "Login failed."}
-              </p>
+              <p className="text-red-500 text-sm">Login failed.</p>
             )}
             <Button className="w-full">Login</Button>
           </form>

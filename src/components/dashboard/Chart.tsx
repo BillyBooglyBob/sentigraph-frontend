@@ -11,7 +11,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -121,6 +120,7 @@ const Chart = ({ data, labels, title, description }: ChartProps) => {
             {labels.map((label, index) => (
               <Line
                 // Convert to camelCase to match the dataset keys
+                key={label}
                 dataKey={label.replace(/\s+/g, "")}
                 type="monotone"
                 strokeWidth={2}

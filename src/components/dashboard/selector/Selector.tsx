@@ -141,7 +141,7 @@ const Selector = ({
                     </div>
                   </FormControl>
                   <FormDescription className="text-xs text-zinc-500 dark:text-white">
-                    This is the {label} you're adding.
+                    This is the {label} you are adding.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
