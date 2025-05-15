@@ -1,0 +1,65 @@
+- Droplet, go to /webapp, clone sentigraph-frontend
+- apt install nginx (on pink screen, press enter for default settings)
+
+- cd /etc/nginx/sites-enabled/
+- ls
+- rm default
+- touch frontend.conf
+- inside frontend.conf:
+server {
+  listen 80;
+  server_name 209.38.95.111
+
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+
+- install node:
+# 1. Install curl (if not already installed)
+sudo apt update
+sudo apt install curl -y
+
+# 2. Download and run NodeSource setup script (for Node.js 20)
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+# 3. Install Node.js
+sudo apt install nodejs -y
+
+# 4. Verify installation
+node -v
+npm -v
+
+- go to /sentigraph_frontend
+- npm install
+- mv .env.prod .env
+- npm run build
+
+If any error, come back to sentigraph-frontend to fix, push then pull on server
+
+- npm start
+
+- set action.ts: process.env.NODE_ENV === 'production' to false
+
+
+- backend, create superuser
+  - cd sentigraph-backend
+  - cd sentigraph_backend (where the Dockerfile is)
+  - docker-compose -f ../docker-compose.prod.yml exec web python manage.py createsuperuser (something like this)
+  - Email: testSuper@gmail.com
+  - Password: testTheSoup
+
+- potentially change: backend -> setting.py -> ALLOWED_HOSTS = ["209.38.95.111"]
+
+- backend -> .env.prod -> set DEBUG=0
+
+
+- make frontend run in background
+  - npm i -g pm2
+  - go to sentigraph-frontend
+  - pm2 start npm --name "sentigraph" -- start
