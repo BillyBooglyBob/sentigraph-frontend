@@ -1,20 +1,20 @@
-import DashboardCard from "@/components/dashboard/DashboardCard";
-
 export default function Home() {
   return (
-    <div>
-      <div className="flex flex-col md:flex-row justify-between gap-4 mb-5">
-        <DashboardCard
-          title="Sentiment Value"
-          value={0.38}
-          date="20 June 2001 - 12 April 2023"
-        />
-        <DashboardCard
-          title="Posts Analysed"
-          value={3290}
-          date="20 June 2001 - 12 April 2023"
-        />
-      </div>
+    <div className="max-w-4xl mx-auto px-6 py-12 text-center">
+      {/* Header */}
+      <h1 className="text-5xl font-extrabold text-gray-900 mb-4 dark:text-white">
+        Sentigraph
+      </h1>
+      <p className="text-lg text-gray-600 mb-12">
+        Analyze sentiment on various aspects of your company with ease.
+      </p>
+
+      {/* Image */}
+      <img
+        src="/images/home-hero.png"
+        alt="Sentiment Analysis Illustration"
+        className="mx-auto w-full max-w-md rounded-lg shadow-md"
+      />
     </div>
   );
 }

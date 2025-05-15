@@ -13,41 +13,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-// Menu items.
-const items = {
-  main: [
-    {
-      title: "Home",
-      url: "/",
-      icon: Home,
-    },
-    {
-      title: "Companies",
-      url: "/companies",
-      icon: Newspaper,
-    },
-    {
-      title: "Compare",
-      url: "/companies-comparison",
-      icon: ChartArea,
-    },
-  ],
-  admin: [
-    {
-      title: "Admin",
-      url: "/admin",
-      icon: Folder,
-    },
-  ],
-  user: [
-    {
-      title: "Profile",
-      url: "/profile",
-      icon: User,
-    },
-  ],
-};
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/redux/hook";
@@ -64,6 +29,41 @@ const AppSidebar = () => {
     return pathname === url;
   };
 
+  // Menu items.
+  const items = {
+    main: [
+      {
+        title: "Home",
+        url: "/",
+        icon: Home,
+      },
+      {
+        title: "Companies",
+        url: user.email ? "/companies" : "/auth",
+        icon: Newspaper,
+      },
+      {
+        title: "Compare",
+        url: user.email ? "/companies-comparison" : "/auth",
+        icon: ChartArea,
+      },
+    ],
+    admin: [
+      {
+        title: "Admin",
+        url: "/admin",
+        icon: Folder,
+      },
+    ],
+    user: [
+      {
+        title: "Profile",
+        url: "/profile",
+        icon: User,
+      },
+    ],
+  };
+
   // Menus to display, conditioned based on user role.
   const groups = [
     { label: "Main", items: items.main },
@@ -74,7 +74,7 @@ const AppSidebar = () => {
   ];
 
   return (
-    <Sidebar className="mt-20" variant="inset">
+    <Sidebar className="mt-20" variant="inset" collapsible="icon">
       <SidebarContent>
         {groups.map((group) => (
           <SidebarGroup key={group.label}>
