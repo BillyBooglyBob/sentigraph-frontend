@@ -8,7 +8,7 @@
 - inside frontend.conf:
 server {
   listen 80;
-  server_name 209.38.95.111
+  server_name 209.38.95.111;
 
   location / {
     proxy_pass http://localhost:3000;
@@ -52,7 +52,7 @@ If any error, come back to sentigraph-frontend to fix, push then pull on server
   - cd sentigraph_backend (where the Dockerfile is)
   - docker-compose -f ../docker-compose.prod.yml exec web python manage.py createsuperuser (something like this)
   - Email: testSuper@gmail.com
-  - Password: testTheSoup
+  - Password: soupYumYum
 
 - potentially change: backend -> setting.py -> ALLOWED_HOSTS = ["209.38.95.111"]
 
